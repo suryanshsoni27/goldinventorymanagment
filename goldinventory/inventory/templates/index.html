@@ -31,23 +31,32 @@
             </th>
         </tr>
 
+
+        <!-- type = models.CharField(max_length=100, blank=False)  # name of column
+    price = models.IntegerField()
+    choice = (('AVAILABLE', 'Item ready to be sold'), ('SOLD',
+                                                       'Item sold'), ('In production', 'Item in manufacturing'))  # drop down options
+    status = models.CharField(
+        max_length=100, choices=choice, default="not available")  # set up drop down options
+    issues = models.CharField(max_length=100, default="no stuff") -->
+
         <!-------this names shoudl be exactly same to the one mentioend in models files---->
         <tbody>
             {% for items in items %}
             <tr>
                 <td>
-                    {{item.type}}
+                    {{ item.type }}
 
                 </td>
                 <td>
-                    {{item.price}}
+                    {{ item.price }}
                 </td>
                 <td>
-                    {{item.status}}
+                    {{ item.status }}
 
                 </td>
                 <td>
-                    {{item.issues}}
+                    {{ item.issues }}
 
                 </td>
             </tr>
