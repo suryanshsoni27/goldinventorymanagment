@@ -1,0 +1,62 @@
+{%extends 'base.html'%} {%block body%}
+
+<div class="button-group">
+
+    <!---this name shoudl be same as in display urls--->
+    <a href="{% url 'display_diamonds' %}" class="btn btn-danger btn-md" role="button">diamonds</a>
+    <a href="#" class="btn btn-warning btn-md" role="button">+</a>
+
+    <a href="{% url 'display_earrings' %}" class="btn btn-danger btn-md" role="button">earrings</a>
+    <a href="#" class="btn btn-warning btn-md" role="button">+</a>
+
+    <a href="{% url 'display_rings' %}" class="btn btn-danger btn-md" role="button">rings</a>
+    <a href="#" class="btn btn-warning btn-md" role="button">+</a>
+
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                id
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Cost
+            </th>
+            <th>
+                Status
+            </th>
+        </tr>
+
+        <!-------this names shoudl be exactly same to the one mentioend in models files---->
+        <tbody>
+            {% for items in items %}
+            <tr>
+                <td>
+                    {{item.type}}
+
+                </td>
+                <td>
+                    {{item.price}}
+                </td>
+                <td>
+                    {{item.status}}
+
+                </td>
+                <td>
+                    {{item.issues}}
+
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+    </thead>
+
+</table>
+
+{%endblock%}
