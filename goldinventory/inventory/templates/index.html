@@ -4,21 +4,23 @@
 
     <!---this name shoudl be same as in display urls--->
     <a href="{% url 'display_diamonds' %}" class="btn btn-danger btn-md" role="button">diamonds</a>
-    <a href="#" class="btn btn-warning btn-md" role="button">+</a>
+    <a href="{% url 'add_diamonds' %}" class="btn btn-warning btn-md" role="button">+</a>
 
     <a href="{% url 'display_earrings' %}" class="btn btn-danger btn-md" role="button">earrings</a>
-    <a href="#" class="btn btn-warning btn-md" role="button">+</a>
+    <a href="{% url 'add_earrings' %}" class="btn btn-warning btn-md" role="button">+</a>
 
     <a href="{% url 'display_rings' %}" class="btn btn-danger btn-md" role="button">rings</a>
-    <a href="#" class="btn btn-warning btn-md" role="button">+</a>
+    <a href="{% url 'add_rings' %}" class="btn btn-warning btn-md" role="button">+</a>
 
 </div>
-
+<h4>
+    All current {{header}}
+</h4>
 <table class="table table-hover">
     <thead>
         <tr>
             <th>
-                id
+                Id
             </th>
             <th>
                 Type
@@ -28,6 +30,9 @@
             </th>
             <th>
                 Status
+            </th>
+            <th>
+                Issues
             </th>
         </tr>
 
@@ -42,8 +47,12 @@
 
         <!-------this names shoudl be exactly same to the one mentioend in models files---->
         <tbody>
-            {% for items in items %}
+            {% for item in items %}
             <tr>
+                <td>
+                    {{ item.id }}
+
+                </td>
                 <td>
                     {{ item.type }}
 
@@ -59,6 +68,26 @@
                     {{ item.issues }}
 
                 </td>
+                {% if header|lower == "diamonds" %}
+                <td>
+                    <a href="{% url 'edit_diamonds' item.id %}" class="btn btn-primary btn-sm" role="button">Edit</a>
+                    <br>
+                    <a href="{% url 'delete_diamonds' item.id %}" class="btn btn-primary btn-sm" role="button">Delete</a>
+                </td>
+                {% elif header|lower == "rings" %}
+                <td>
+                    <a href="{% url 'edit_rings' item.id %}" class="btn btn-primary btn-sm" role="button">Edit</a>
+                    <br>
+                    <a href="{% url 'delete_rings' item.id %}" class="btn btn-primary btn-sm" role="button">Delete</a>
+                </td>
+                {% else %}
+                <td>
+                    <a href="{% url 'edit_earrings' item.id %}" class="btn btn-primary btn-sm" role="button">Edit</a>
+                    <br>
+                    <a href="{% url 'delete_earrings' item.id %}" class="btn btn-primary btn-sm" role="button">Delete</a>
+                </td>
+
+                {% endif %}
             </tr>
 
             {% endfor %}
