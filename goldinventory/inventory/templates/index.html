@@ -1,4 +1,49 @@
-{%extends 'base.html'%} {%block body%}
+ {%extends 'base.html'%} {%block body%}
+<style>
+    a {
+        flex: auto;
+    }
+    
+    thead {
+        margin-top: 20
+    }
+    
+    tr {
+        display: block;
+        margin-bottom: 1.5rem;
+        padding: 1rem 0.5rem 0.5rem 1rem;
+        border-radius: 20px;
+        background-color: transparentize( white, 0.15);
+        box-shadow: 0 0 1rem transparentize( black, 0.9);
+        flex: 1;
+        flex-direction: row;
+    }
+    
+    tr:hover {
+        background-color: yellow;
+    }
+    
+    tr:hover td {
+        background-color: yellow;
+        /* or #000 */
+    }
+    
+    td {
+        display: inline-block;
+        margin: 0 0.5rem 0.5rem 0;
+        padding: 0.5rem;
+        text-align: left;
+        background-color: white;
+        border: 1px solid transparentize( #58C25F, 0.5);
+        flex: 1;
+        flex-direction: row;
+    }
+    
+    td:hover {
+        background-color: black;
+        color: blue;
+    }
+</style>
 
 <div class="button-group">
 
@@ -13,28 +58,34 @@
     <a href="{% url 'add_rings' %}" class="btn btn-warning btn-md" role="button">+</a>
 
 </div>
+
 <h4>
     All current {{header}}
 </h4>
-<table class="table table-hover">
+<table>
     <thead>
         <tr>
             <th>
                 Id
             </th>
+
             <th>
                 Type
             </th>
+
             <th>
                 Cost
             </th>
+
             <th>
                 Status
             </th>
+
             <th>
                 Issues
             </th>
         </tr>
+        <br>
 
 
         <!-- type = models.CharField(max_length=100, blank=False)  # name of column
@@ -46,7 +97,7 @@
     issues = models.CharField(max_length=100, default="no stuff") -->
 
         <!-------this names shoudl be exactly same to the one mentioend in models files---->
-        <tbody>
+        <tbody style="flex-direction: row">
             {% for item in items %}
             <tr>
                 <td>
@@ -70,21 +121,34 @@
                 </td>
                 {% if header|lower == "diamonds" %}
                 <td>
-                    <a href="{% url 'edit_diamonds' item.id %}" class="btn btn-primary btn-sm" role="button">Edit</a>
+                    <div>
+                        <a href="{% url 'edit_diamonds' item.id %}" class="btn btn-primary btn-sm" role="button">Edit</a>
+                    </div>
                     <br>
-                    <a href="{% url 'delete_diamonds' item.id %}" class="btn btn-primary btn-sm" role="button">Delete</a>
+                    <div>
+                        <a href="{% url 'delete_diamonds' item.id %}" class="btn btn-primary btn-sm" role="button">Delete</a>
+                    </div>
                 </td>
                 {% elif header|lower == "rings" %}
                 <td>
-                    <a href="{% url 'edit_rings' item.id %}" class="btn btn-primary btn-sm" role="button">Edit</a>
+                    <div>
+                        <a href="{% url 'edit_rings' item.id %}" class="btn btn-primary btn-sm" role="button">Edit</a>
+                    </div>
                     <br>
-                    <a href="{% url 'delete_rings' item.id %}" class="btn btn-primary btn-sm" role="button">Delete</a>
+                    <div>
+                        <a href="{% url 'delete_rings' item.id %}" class="btn btn-primary btn-sm" role="button">Delete</a>
+                    </div>
                 </td>
                 {% else %}
                 <td>
-                    <a href="{% url 'edit_earrings' item.id %}" class="btn btn-primary btn-sm" role="button">Edit</a>
+                    <div>
+                        <a href="{% url 'edit_earrings' item.id %}" class="btn btn-primary btn-sm" role="button">Edit</a>
+                    </div>
                     <br>
-                    <a href="{% url 'delete_earrings' item.id %}" class="btn btn-primary btn-sm" role="button">Delete</a>
+
+                    <div>
+                        <a href="{% url 'delete_earrings' item.id %}" class="btn btn-primary btn-sm" role="button">Delete</a>
+                    </div>
                 </td>
 
                 {% endif %}
